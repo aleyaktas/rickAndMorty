@@ -4,22 +4,34 @@ import { useQuery } from "@apollo/client";
 import { GET_CHARACTERS } from "../queries";
 import LoadingGif from "../assets/images/Loading.gif";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
+import ReactPaginate from "react-paginate";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
+  const [pageNumber, setPageNumber] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
 
   const { loading, error, data } = useQuery(GET_CHARACTERS, {
     variables: {
       name: searchTerm,
+      pageNumber: pageNumber,
       status: filter === "all" ? "" : filter,
     },
   });
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data && data.characters && data.characters.info) {
+      setPageCount(Math.ceil(data.characters.info.count / 20 + 1));
+    }
+  }, [data]);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPageNumber(0);
     setFilter(e.target.value);
   };
 
@@ -58,6 +70,19 @@ const Home = () => {
             <span className="flex justify-center mt-16 text-white text-2xl">
               Character not found!
             </span>
+          )}
+          {data.characters.info.count > 20 && (
+            <ReactPaginate
+              containerClassName="pagination"
+              forcePage={pageNumber}
+              breakLabel="..."
+              nextLabel="Next >"
+              onPageChange={(e) => setPageNumber(e.selected)}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              previousLabel="< Prev"
+              renderOnZeroPageCount={null}
+            />
           )}
         </>
       )}

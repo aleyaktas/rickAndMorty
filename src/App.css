@@ -1,3 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Pagination.css */
+.pagination {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  padding: 0;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  padding: 5px 10px;
+  margin: 0 2px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.pagination li a:hover {
+  background-color: #eeeeee8f;
+}
+
+.pagination .active a {
+  background-color: #b2df27;
+  color: white;
+  border-color: #b2df27;
+}
+
+.pagination .break a {
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination .disabled a {
+  color: #888;
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination .selected a {
+  background-color: #b2df27;
+  color: black;
+  border-color: #b2df27;
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .pagination li a {
+    padding: 3px 6px;
+  }
+}
