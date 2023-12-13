@@ -1,12 +1,11 @@
 import "./App.css";
+import DefaultTemplate from "./layout/DefaultTemplate";
 
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline text-red-500">
-        Rick And Morty
-      </h1>
-    </div>
+    <DefaultTemplate>
+      <h1>Rick And Morty</h1>
+    </DefaultTemplate>
   );
 }
 
