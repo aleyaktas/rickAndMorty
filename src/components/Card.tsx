@@ -1,4 +1,5 @@
 export interface CardProps {
+  id: string;
   image: string;
   name: string;
   status: Status;

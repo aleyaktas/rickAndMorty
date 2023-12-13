@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { GET_DETAIL_CHARACTER_BY_ID } from "../queries";
 import DefaultTemplate from "../layout/DefaultTemplate";
 import backIcon from "../assets/images/Back.svg";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface Episode {
   name: string;
@@ -30,6 +31,9 @@ interface DetailData {
 }
 
 const Detail = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [detailData, setDetailData] = useState<DetailData>({
     image: "",
     name: "",
@@ -42,7 +46,7 @@ const Detail = () => {
   });
 
   const { loading, error, data } = useQuery(GET_DETAIL_CHARACTER_BY_ID, {
-    variables: { id: 20 },
+    variables: { id },
   });
   useEffect(() => {
     if (data && data.character) {
@@ -57,7 +61,7 @@ const Detail = () => {
         <>
           <button
             className="flex items-center justify-center gap-2 px-4 py-1 text-primaryText text-sm border border-primaryText rounded-full cursor-pointer mb-20"
-            onClick={() => {}}
+            onClick={() => navigate(-1)}
           >
             <img src={backIcon} width={24} height={24} alt="Back" /> Back
           </button>
