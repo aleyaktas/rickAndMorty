@@ -18,6 +18,8 @@
   justify-content: center;
   padding: 0;
   cursor: pointer;
+  width: max-content;
+  margin: auto;
 }
 
 .pagination li {
@@ -61,19 +63,22 @@
   font-size: 18px;
 }
 
-@media (max-width: 600px) {
+/* Responsive styles */
+@media (max-width: 425px) {
+  .pagination {
+    flex-wrap: wrap;
+  }
+
   .pagination li a {
-    padding: 3px 6px;
-  }
-}
-
-/* Additional media queries to ensure responsiveness */
-@media (max-width: 768px) {
-  .not-found-text h1 {
-    font-size: 3rem;
+    padding: 8px 12px;
   }
 
-  .not-found-text p {
-    font-size: 1.2rem;
+  .pagination li.previous a,
+  .pagination li.next a {
+    padding: 8px;
+  }
+
+  .pagination li:not(.previous):not(.next):not(.active):not(.selected) {
+    display: none;
   }
 }

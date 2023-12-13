@@ -37,10 +37,16 @@ const DefaultTemplate: React.FC<TemplateProps> = ({
   return (
     <div className="relative h-screen w-screen">
       {memoizedParticles}
-      <div className="absolute top-0 left-0 right-0 px-40 py-10">
+      <div className="absolute top-0 left-0 right-0 px-5 md:px-20 lg:px-40 py-5">
         {!disableLogo && (
-          <div className="flex gap-4 py-2 justify-center">
-            <img src={logo} alt="logo" height={200} width={250} />
+          <div className="flex justify-center gap-4 pb-6">
+            <img
+              className="max-w-none"
+              src={logo}
+              alt="logo"
+              height={200}
+              width={250}
+            />
           </div>
         )}
         {children}

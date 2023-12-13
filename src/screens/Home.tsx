@@ -39,9 +39,10 @@ const Home = () => {
     <DefaultTemplate>
       <SearchBar
         searchTerm={searchTerm}
-        onSearch={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setSearchTerm(e.target.value)
-        }
+        onSearch={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setSearchTerm(e.target.value);
+          setPageNumber(0);
+        }}
         onFilter={(e) => handleFilterChange(e)}
         filter={filter}
       />
@@ -55,7 +56,7 @@ const Home = () => {
       {!loading && !error && data && (
         <>
           {data.characters.info.count > 0 ? (
-            <div className=" grid gap-14 p-10 grid-cols-card">
+            <div className="grid grid-cols-card gap-12 lg:gap-20 justify-items-center p-10">
               {data.characters.results.map((card: CardProps) => (
                 <Card
                   id={card.id}
@@ -78,8 +79,8 @@ const Home = () => {
               breakLabel="..."
               nextLabel="Next >"
               onPageChange={(e) => setPageNumber(e.selected)}
-              pageRangeDisplayed={5}
               pageCount={pageCount}
+              pageRangeDisplayed={1}
               previousLabel="< Prev"
               renderOnZeroPageCount={null}
             />

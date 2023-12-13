@@ -4,7 +4,6 @@ import { GET_DETAIL_CHARACTER_BY_ID } from "../queries";
 import DefaultTemplate from "../layout/DefaultTemplate";
 import backIcon from "../assets/images/Back.svg";
 import { useNavigate, useParams } from "react-router-dom";
-import NotFound from "./NotFound";
 
 interface Episode {
   name: string;
@@ -62,16 +61,15 @@ const Detail = () => {
       {!loading && data && (
         <>
           <button
-            className="flex items-center justify-center gap-2 px-4 py-1 text-primaryText text-sm border border-primaryText rounded-full cursor-pointer mb-20"
+            className="flex items-center justify-center gap-2 px-4 py-1 text-primaryText text-sm border border-primaryText rounded-full cursor-pointer my-4"
             onClick={() => navigate(-1)}
           >
             <img src={backIcon} width={24} height={24} alt="Back" /> Back
           </button>
-          <div className="bg-cardBackground rounded-2xl p-16 flex gap-16">
+          <div className="bg-cardBackground rounded-2xl p-8 md:p-16 flex flex-col md:flex-row gap-16">
             <div>
               <img
-                className="rounded-2xl shadow-cardDetailImage"
-                height={350}
+                className="rounded-2xl shadow-cardDetailImage w-full"
                 src={detailData.image}
                 alt={detailData.name}
               />
