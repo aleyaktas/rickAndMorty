@@ -3,7 +3,9 @@ import "./App.css";
 function App() {
   return (
     <div>
-      <h1>Rick And Morty</h1>
+      <h1 className="text-3xl font-bold underline text-red-500">
+        Rick And Morty
+      </h1>
     </div>
   );
 }
