@@ -1,13 +1,6 @@
-import React from "react";
-import { Status } from "./Card";
-import Down from "../assets/images/Down.svg";
-
-interface SearchBarProps {
-  onSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFilter: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  searchTerm: string;
-  filter: string;
-}
+import Down from "../assets/icons/Down.svg";
+import { IStatus } from "../types/Card.interfaces";
+import { SearchBarProps } from "../types/SearchBar.interfaces";
 
 const SearchBar = ({
   onSearch,
@@ -18,7 +11,7 @@ const SearchBar = ({
   return (
     <div className="flex justify-center mx-auto mt-5 px-10 w-1/2">
       <input
-        className="flex-grow mr-3 p-3 rounded-md border text-xs md:text-base focus:outline-primaryText"
+        className="flex-grow mr-3 p-3 rounded-md border text-xs md:text-base focus:outline-primaryText h-12"
         type="text"
         placeholder="Search characters..."
         value={searchTerm}
@@ -26,11 +19,11 @@ const SearchBar = ({
       />
       <div className="relative">
         <select
-          className="p-3 rounded-md border text-xs md:text-base md:min-w-filter appearance-none pr-10 focus:outline-primaryText"
+          className="p-3 rounded-md border text-xs md:text-base md:min-w-filter appearance-none pr-10 focus:outline-primaryText h-12"
           value={filter}
-          onChange={onFilter}
+          onChange={(e) => onFilter(e.target.value as IStatus)}
         >
-          {Object.entries(Status).map(([key, value]) => (
+          {Object.entries(IStatus).map(([key, value]) => (
             <option key={key} value={value}>
               {value}
             </option>

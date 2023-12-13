@@ -1,24 +1,12 @@
-export interface CardProps {
-  id: string;
-  image: string;
-  name: string;
-  status: Status;
-  handleClick: () => void;
-}
-
-export enum Status {
-  all = "All",
-  dead = "Dead",
-  alive = "Alive",
-  unknown = "Unknown",
-}
+import { CardProps } from "../types/Card.interfaces";
 
 const Card = ({ image, name, status, handleClick }: CardProps) => {
   const statusColorClass =
     status === "Dead" ? "bg-red" : status === "Alive" ? "bg-green" : "bg-gray";
+
   return (
     <div
-      className="flex flex-col h-80 w-48 lg:w-64 rounded-3xl text-white overflow-hidden shadow-card cursor-pointer hover:animate-wiggle"
+      className="flex flex-col h-80 w-56 lg:w-64 rounded-3xl text-white overflow-hidden shadow-card cursor-pointer hover:animate-wiggle"
       onClick={handleClick}
     >
       <div className="h-64 flex justify-center items-center p-5 bg-cardBackground">

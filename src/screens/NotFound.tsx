@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import NotFoundImg from "../assets/images/NotFound.png";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import DefaultTemplate from "../layout/DefaultTemplate";
+import NotFoundImg from "../assets/images/NotFound.png";
 
 const NotFound = () => {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
+
   return (
     <DefaultTemplate disableLogo>
       <div className="flex flex-col items-center justify-center h-screen text-white text-center">

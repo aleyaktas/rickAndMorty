@@ -1,15 +1,11 @@
+import React, { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import React, { useEffect, useMemo, useState } from "react";
-import logo from "../assets/images/Logo.svg";
-import { particlesOptions } from "../helper/particlesOptions";
 import type { RecursivePartial } from "@tsparticles/engine";
 import { InspectOptions } from "util";
-
-interface TemplateProps {
-  children: React.ReactNode;
-  disableLogo?: boolean;
-}
+import logo from "../assets/icons/Logo.svg";
+import { particlesOptions } from "../helper/particlesOptions";
+import { TemplateProps } from "../types/DefaultTemplate.interfaces";
 
 const DefaultTemplate: React.FC<TemplateProps> = ({
   children,
@@ -43,7 +39,7 @@ const DefaultTemplate: React.FC<TemplateProps> = ({
             <img
               className="max-w-none w-60 md:w-80"
               src={logo}
-              alt="logo"
+              alt="Rick and Morty"
               height={200}
             />
           </div>

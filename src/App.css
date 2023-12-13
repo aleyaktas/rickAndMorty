@@ -78,7 +78,8 @@
     padding: 8px;
   }
 
-  .pagination li:not(.previous):not(.next):not(.active):not(.selected) {
+  .pagination
+    li:not(.previous):not(.next):not(.active):not(.selected):not(.break) {
     display: none;
   }
 }

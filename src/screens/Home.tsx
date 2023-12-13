@@ -1,38 +1,43 @@
-import DefaultTemplate from "../layout/DefaultTemplate";
-import Card, { CardProps } from "../components/Card";
+import { useEffect, useState } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 import { useQuery } from "@apollo/client";
 import { GET_CHARACTERS } from "../queries";
 import LoadingGif from "../assets/images/Loading.gif";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
-import ReactPaginate from "react-paginate";
+import DefaultTemplate from "../layout/DefaultTemplate";
+import {
+  PAGE_RANGE_DISPLAYED,
+  PER_PAGE_COUNT,
+} from "../assets/constants/pagination";
+import { CardProps, IStatus } from "../types/Card.interfaces";
+import Card from "../components/Card";
 
 const Home = () => {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filter, setFilter] = useState("All");
-  const [pageNumber, setPageNumber] = useState(0);
-  const [pageCount, setPageCount] = useState(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filter, setFilter] = useState<IStatus>(IStatus.all);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [pageCount, setPageCount] = useState<number>(1);
 
   const { loading, error, data } = useQuery(GET_CHARACTERS, {
     variables: {
       name: searchTerm,
       pageNumber: pageNumber,
-      status: filter === "All" ? "" : filter,
+      status: filter === IStatus.all ? "" : filter,
     },
   });
 
   useEffect(() => {
     if (data && data.characters && data.characters.info) {
-      setPageCount(Math.ceil(data.characters.info.count / 20 + 1));
+      setPageCount(Math.ceil(data.characters.info.count / PER_PAGE_COUNT + 1));
     }
   }, [data]);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFilterChange = (e: IStatus) => {
     setPageNumber(0);
-    setFilter(e.target.value);
+    setFilter(e);
   };
 
   return (
@@ -43,7 +48,7 @@ const Home = () => {
           setSearchTerm(e.target.value);
           setPageNumber(0);
         }}
-        onFilter={(e) => handleFilterChange(e)}
+        onFilter={(e: IStatus) => handleFilterChange(e)}
         filter={filter}
       />
 
@@ -72,15 +77,15 @@ const Home = () => {
               Character not found!
             </span>
           )}
-          {data.characters.info.count > 20 && (
+          {data.characters.info.count > PER_PAGE_COUNT && (
             <ReactPaginate
               containerClassName="pagination"
-              forcePage={pageNumber}
+              forcePage={pageNumber - 1}
               breakLabel="..."
               nextLabel="Next >"
-              onPageChange={(e) => setPageNumber(e.selected)}
-              pageCount={pageCount}
-              pageRangeDisplayed={1}
+              onPageChange={(e) => setPageNumber(e.selected + 1)}
+              pageCount={pageCount - 1}
+              pageRangeDisplayed={PAGE_RANGE_DISPLAYED}
               previousLabel="< Prev"
               renderOnZeroPageCount={null}
             />

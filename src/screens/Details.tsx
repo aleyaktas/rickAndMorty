@@ -1,44 +1,21 @@
-import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
+import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import { GET_DETAIL_CHARACTER_BY_ID } from "../queries";
 import DefaultTemplate from "../layout/DefaultTemplate";
-import backIcon from "../assets/images/Back.svg";
-import { useNavigate, useParams } from "react-router-dom";
-import NotFound from "./NotFound";
+import backIcon from "../assets/icons/Back.svg";
+import LoadingGif from "../assets/images/Loading.gif";
+import { IStatus } from "../types/Card.interfaces";
+import { IDetailsData } from "../types/Details.interfaces";
 
-interface Episode {
-  name: string;
-  episode: string;
-  air_date: string;
-}
-
-interface Location {
-  name: string;
-}
-
-interface Origin {
-  name: string;
-}
-
-interface DetailData {
-  image: string;
-  name: string;
-  status: string;
-  species: string;
-  gender: string;
-  episode: Episode[];
-  location: Location;
-  origin: Origin;
-}
-
-const Detail = () => {
+const Details = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
-  const [detailData, setDetailData] = useState<DetailData>({
+  const [detailData, setDetailData] = useState<IDetailsData>({
     image: "",
     name: "",
-    status: "",
+    status: IStatus.unknown,
     species: "",
     gender: "",
     episode: [{ name: "", episode: "", air_date: "" }],
@@ -67,7 +44,12 @@ const Detail = () => {
 
   return (
     <DefaultTemplate>
-      {loading && <p className="text-white">Loading...</p>}
+      {loading && (
+        <div className="flex justify-center mt-14">
+          <img src={LoadingGif} alt="loading-gif" width={200} height={200} />
+        </div>
+      )}
+      {error && <p>Error: {error.message}</p>}
       {!loading && data && (
         <>
           <button
@@ -95,9 +77,9 @@ const Detail = () => {
                 <div className="flex items-center gap-2">
                   <div
                     className={`${
-                      detailData.status === "Dead"
+                      detailData.status === IStatus.dead
                         ? "bg-red"
-                        : detailData.status === "Alive"
+                        : detailData.status === IStatus.alive
                         ? "bg-green"
                         : "bg-gray"
                     } rounded-full w-3 h-3`}
@@ -139,4 +121,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default Details;
