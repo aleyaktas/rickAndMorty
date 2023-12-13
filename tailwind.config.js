@@ -20,6 +20,9 @@ module.exports = {
       gridTemplateColumns: {
         card: "repeat(auto-fill, minmax(200px, 1fr))",
       },
+      minWidth: {
+        filter: "10rem",
+      },
     },
   },
   plugins: [],
