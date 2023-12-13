@@ -15,6 +15,9 @@ module.exports = {
         cardImageBorder: "#ffffffd4",
         cardInfo: "#cccccc",
       },
+      gridTemplateColumns: {
+        card: "repeat(auto-fill, minmax(200px, 1fr))",
+      },
     },
   },
   plugins: [],
