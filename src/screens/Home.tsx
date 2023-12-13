@@ -12,7 +12,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("All");
   const [pageNumber, setPageNumber] = useState(0);
   const [pageCount, setPageCount] = useState(1);
 
@@ -20,7 +20,7 @@ const Home = () => {
     variables: {
       name: searchTerm,
       pageNumber: pageNumber,
-      status: filter === "all" ? "" : filter,
+      status: filter === "All" ? "" : filter,
     },
   });
 

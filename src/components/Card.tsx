@@ -7,6 +7,7 @@ export interface CardProps {
 }
 
 export enum Status {
+  all = "All",
   dead = "Dead",
   alive = "Alive",
   unknown = "Unknown",
@@ -14,11 +15,7 @@ export enum Status {
 
 const Card = ({ image, name, status, handleClick }: CardProps) => {
   const statusColorClass =
-    status === "Dead"
-      ? "bg-red-500"
-      : status === "Alive"
-      ? "bg-green-500"
-      : "bg-gray-500";
+    status === "Dead" ? "bg-red" : status === "Alive" ? "bg-green" : "bg-gray";
   return (
     <div
       className="flex flex-col w-64 h-80 rounded-3xl text-white overflow-hidden shadow-card cursor-pointer"
@@ -36,7 +33,7 @@ const Card = ({ image, name, status, handleClick }: CardProps) => {
           {name}
         </h3>
         <span
-          className={`inline-block rounded-lg text-base text-white px-2 py-1 ${statusColorClass} text-white`}
+          className={`inline-block rounded-lg text-base text-white px-2 py-1 ${statusColorClass}`}
         >
           {status}
         </span>

@@ -4,6 +4,7 @@ import { GET_DETAIL_CHARACTER_BY_ID } from "../queries";
 import DefaultTemplate from "../layout/DefaultTemplate";
 import backIcon from "../assets/images/Back.svg";
 import { useNavigate, useParams } from "react-router-dom";
+import NotFound from "./NotFound";
 
 interface Episode {
   name: string;
@@ -48,6 +49,7 @@ const Detail = () => {
   const { loading, error, data } = useQuery(GET_DETAIL_CHARACTER_BY_ID, {
     variables: { id },
   });
+
   useEffect(() => {
     if (data && data.character) {
       setDetailData(data.character);
@@ -86,10 +88,10 @@ const Detail = () => {
                   <div
                     className={`${
                       detailData.status === "Dead"
-                        ? "bg-red-500"
+                        ? "bg-red"
                         : detailData.status === "Alive"
-                        ? "bg-green-500"
-                        : "bg-gray-500"
+                        ? "bg-green"
+                        : "bg-gray"
                     } rounded-full w-3 h-3`}
                   />
                   <p>{detailData.status}</p>

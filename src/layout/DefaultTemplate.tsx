@@ -8,9 +8,13 @@ import { InspectOptions } from "util";
 
 interface TemplateProps {
   children: React.ReactNode;
+  disableLogo?: boolean;
 }
 
-const DefaultTemplate: React.FC<TemplateProps> = ({ children }) => {
+const DefaultTemplate: React.FC<TemplateProps> = ({
+  children,
+  disableLogo,
+}) => {
   const [init, setInit] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,10 +37,12 @@ const DefaultTemplate: React.FC<TemplateProps> = ({ children }) => {
   return (
     <div className="relative h-screen w-screen">
       {memoizedParticles}
-      <div className="absolute top-0 left-0 right-0 px-40 py-5">
-        <div className="flex gap-4 py-2 justify-center">
-          <img src={logo} alt="logo" height={200} width={250} />
-        </div>
+      <div className="absolute top-0 left-0 right-0 px-40 py-10">
+        {!disableLogo && (
+          <div className="flex gap-4 py-2 justify-center">
+            <img src={logo} alt="logo" height={200} width={250} />
+          </div>
+        )}
         {children}
       </div>
     </div>

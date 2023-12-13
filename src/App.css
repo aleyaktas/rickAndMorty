@@ -2,13 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
 /* Pagination.css */
 .pagination {
   display: flex;
   list-style: none;
   justify-content: center;
   padding: 0;
-  margin-top: 20px;
   cursor: pointer;
 }
 
@@ -56,5 +64,16 @@
 @media (max-width: 600px) {
   .pagination li a {
     padding: 3px 6px;
+  }
+}
+
+/* Additional media queries to ensure responsiveness */
+@media (max-width: 768px) {
+  .not-found-text h1 {
+    font-size: 3rem;
+  }
+
+  .not-found-text p {
+    font-size: 1.2rem;
   }
 }

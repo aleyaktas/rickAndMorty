@@ -11,6 +11,9 @@ module.exports = {
       backgroundColor: {
         cardBackground: "#1a1a1aba",
         cardInfo: "#302f2f",
+        green: "#008001",
+        red: "#FF0008",
+        gray: "#808080",
       },
       colors: {
         cardImageBorder: "#ffffffd4",
