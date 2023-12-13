@@ -18,7 +18,7 @@ const Card = ({ image, name, status, handleClick }: CardProps) => {
     status === "Dead" ? "bg-red" : status === "Alive" ? "bg-green" : "bg-gray";
   return (
     <div
-      className="flex flex-col h-80 w-48 lg:w-64 rounded-3xl text-white overflow-hidden shadow-card cursor-pointer"
+      className="flex flex-col h-80 w-48 lg:w-64 rounded-3xl text-white overflow-hidden shadow-card cursor-pointer hover:animate-wiggle"
       onClick={handleClick}
     >
       <div className="h-64 flex justify-center items-center p-5 bg-cardBackground">

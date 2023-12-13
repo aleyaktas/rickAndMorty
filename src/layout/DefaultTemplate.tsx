@@ -41,11 +41,10 @@ const DefaultTemplate: React.FC<TemplateProps> = ({
         {!disableLogo && (
           <div className="flex justify-center gap-4 pb-6">
             <img
-              className="max-w-none"
+              className="max-w-none w-60 md:w-80"
               src={logo}
               alt="logo"
               height={200}
-              width={250}
             />
           </div>
         )}

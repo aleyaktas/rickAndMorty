@@ -4,6 +4,7 @@ import { GET_DETAIL_CHARACTER_BY_ID } from "../queries";
 import DefaultTemplate from "../layout/DefaultTemplate";
 import backIcon from "../assets/images/Back.svg";
 import { useNavigate, useParams } from "react-router-dom";
+import NotFound from "./NotFound";
 
 interface Episode {
   name: string;
@@ -50,6 +51,15 @@ const Detail = () => {
   });
 
   useEffect(() => {
+    if (id && Number.isNaN(parseInt(id))) {
+      navigate("/not-found", { replace: true });
+    }
+    if (!loading && (error || !data?.character)) {
+      navigate("/not-found", { replace: true });
+    }
+  }, [loading, error, data, navigate]);
+
+  useEffect(() => {
     if (data && data.character) {
       setDetailData(data.character);
     }
@@ -61,7 +71,7 @@ const Detail = () => {
       {!loading && data && (
         <>
           <button
-            className="flex items-center justify-center gap-2 px-4 py-1 text-primaryText text-sm border border-primaryText rounded-full cursor-pointer my-4"
+            className="flex items-center justify-center gap-2 px-4 py-2 hover:animate-wiggle text-primaryText text-sm border border-primaryText rounded-full cursor-pointer my-4"
             onClick={() => navigate(-1)}
           >
             <img src={backIcon} width={24} height={24} alt="Back" /> Back
